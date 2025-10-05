@@ -24,24 +24,66 @@ namespace Printit.Backend.Services
 
         public bool CreateTypeFile(string fileName)
         {
-            string file = fileName + ".json";
-            string filePath = Path.Combine(DirectoryService.baseDirectory, file);
-            if (checkFileExists(filePath))
+            string filePath = ConstructFilePath(fileName);
+
+            if (CheckFileExists(filePath))
             {
                 return false;
             }
+
             File.Create(filePath);
             return true;
         }
         
-        public bool UpdateTypeFileName(string fileName)
+        public bool UpdateTypeFileName(string fileName, string newFileName)
         {
-            // TODO
+            string filePath = ConstructFilePath(fileName);
+            string newFilePath = ConstructFilePath(newFileName);
+
+            if (!CheckFileExists(filePath) || CheckFileExists(newFilePath))
+            {
+                return false; 
+            }
+
+            try
+            {
+                File.Move(filePath, newFilePath);
+                DeleteTypeFile(filePath);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
         }
 
         public bool DeleteTypeFile(string fileName)
         {
-            // TODO
+
+            string filePath = ConstructFilePath(fileName);
+
+            if (!CheckFileExists(filePath))
+            {
+                return false;
+            }
+
+            try
+            {
+                File.Delete(filePath);
+                return true;
+            } catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
+        public string ConstructFilePath(string fileName)
+        {
+            string file = fileName + ".json";
+            string filePath = Path.Combine(DirectoryService.baseDirectory, file);
+            return filePath;
         }
     }
 }
