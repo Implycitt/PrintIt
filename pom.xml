@@ -25,6 +25,11 @@
       <artifactId>javafx-controls</artifactId>
       <version>${javafx.version}</version>
     </dependency>
+    <dependency>
+        <groupId>org.xerial</groupId>
+        <artifactId>sqlite-jdbc</artifactId>
+        <version>3.50.3.0</version>
+    </dependency>
   </dependencies>
 
   <build>
@@ -35,6 +40,13 @@
         <version>${javafx.maven.plugin.version}</version>
         <configuration>
           <mainClass>com.PrintIt.app.App</mainClass>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.14.1</version>
+        <configuration>
+          <release>25</release>
         </configuration>
       </plugin>
     </plugins>
