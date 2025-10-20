@@ -2,10 +2,11 @@ package com.PrintIt.app.Database;
 
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.UUID;
 
 public class Database
 {
-  public static void createConnection()
+  public static void createDatabase()
   {
     String url = "jdbc:sqlite:my.db";
 
@@ -13,13 +14,24 @@ public class Database
     {
       if (conn != null)
       {
-        var meta = conn.getMetaData();
-        System.out.println("The driver name: " + meta.getDriverName());
         System.out.println("A new database connected");
       }
     } catch (SQLException e)
     {
       System.err.println(e.getMessage());
     }
+  }
+  
+  public static void createTable(String tableName)
+  {
+    // TODO
+  }
+  public static void upsert(String tableName)
+  {
+    // TODO
+  }
+  public static void getById(UUID Id)
+  {
+    // TODO
   }
 }
