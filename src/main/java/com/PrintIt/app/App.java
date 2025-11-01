@@ -6,7 +6,7 @@ public class App
 {
     public static void main( String[] args )
     {
-      Database.createConnection();
-      Window.WindowStart();
+      Window.PrintHello();
+      System.out.println("Nothing here");
     }
 }

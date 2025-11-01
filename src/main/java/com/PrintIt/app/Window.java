@@ -5,6 +5,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import java.util.UUID;
+import com.PrintIt.app.Models.*;
 
 public class Window extends Application 
 {
@@ -27,6 +29,9 @@ public class Window extends Application
 
   public static void PrintHello()
   {
-    System.out.println("Hello world!");
+    UUID id = UUID.randomUUID();
+    String[] cats = {"sub", "category"};
+    PrintLabel newLabel = new PrintLabel(id, "name", "url", cats, "type");
+    System.out.println(newLabel.toString());
   }
 }
