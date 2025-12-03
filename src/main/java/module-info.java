@@ -1,7 +1,7 @@
 module com.implycitt.printit {
-  requires javafx.controls;
-  requires javafx.fxml;
-  requires javafx.web;
+    requires javafx.controls;
+    requires javafx.fxml;
+    requires javafx.web;
 
   requires org.controlsfx.controls;
   requires org.kordamp.bootstrapfx.core;
