@@ -9,4 +9,6 @@ module com.implycitt.printit {
 
     opens com.implycitt.printit to javafx.fxml;
     exports com.implycitt.printit;
+  exports com.implycitt.printit.controllers;
+  opens com.implycitt.printit.controllers to javafx.fxml;
 }
