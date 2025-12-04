@@ -9,6 +9,7 @@ import java.util.*;
 import javax.print.PrintService;
 import javax.print.PrintServiceLookup;
 
+import com.implycitt.printit.Models.ItemLabel;
 import javafx.print.Printer;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.Loader;
@@ -23,7 +24,7 @@ import java.io.File;
   public class Printing
   {
 
-    public static Queue<ItemLabel> printerQueue = new ArrayDeque<String>();
+    public static Queue<ItemLabel> printerQueue = new ArrayDeque<ItemLabel>();
     public static Printer defaultPrinter = Printer.getDefaultPrinter();
     public static Set<PaperSource> supportedSources = getPrinterSources();
     public static PaperSource defaultSource = supportedSources.iterator().next();
