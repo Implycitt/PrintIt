@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Text?>
+<fx:root type="javafx.scene.layout.VBox" xmlns:fx="http://javafx.com/fxml">
+  <TextField layoutX="8.0" layoutY="153.0" />
+  <Button layoutX="56.0" layoutY="558.0" mnemonicParsing="false" text="Add" />
+  <Text layoutX="15.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" />
+</fx:root>

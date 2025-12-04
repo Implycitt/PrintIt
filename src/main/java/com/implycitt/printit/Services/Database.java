@@ -23,6 +23,16 @@ public class Database {
     }
   }
 
+  public static void checkDatabase()
+  {
+    File database = new File(url);
+    if (database.exists())
+    {
+      return;
+    }
+    createDatabase();
+  }
+
   public static void createTable(String table)
   {
     String sql = String.format("CREATE TABLE IF NOT EXISTS %s(id INTEGER PRIMARY KEY, primaryName text NOT NULL, otherNames text, subcategories text, url text NOT NULL, tags text)", table);

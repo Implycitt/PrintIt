@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Text?>
+<fx:root type="javafx.scene.layout.VBox" xmlns:fx="http://javafx.com/fxml">
+  <ChoiceBox layoutX="7.0" layoutY="101.0" prefWidth="150.0" />
+  <TextField layoutX="8.0" layoutY="153.0" />
+  <Button layoutX="56.0" layoutY="558.0" mnemonicParsing="false" text="Add" />
+  <Button layoutX="8.0" layoutY="205.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="34.0" />
+  <TextField layoutX="7.0" layoutY="255.0" />
+  <TextField layoutX="8.0" layoutY="307.0" />
+  <Text layoutX="14.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Category:" />
+  <Text layoutX="15.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" />
+  <Text layoutX="14.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="File:" />
+  <Text layoutX="13.0" layoutY="251.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Subcategories:" />
+  <Text layoutX="10.0" layoutY="303.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type:" />
+</fx:root>

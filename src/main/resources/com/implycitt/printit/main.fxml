@@ -23,29 +23,49 @@
   <children>
     <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
-        <SplitPane dividerPositions="0.6011705685618729" prefHeight="600.0" prefWidth="800.0">
-          <items>
-            <AnchorPane minHeight="0.0" minWidth="0.0" />
-            <AnchorPane minHeight="0.0" minWidth="0.0">
-              <children>
-                <TabPane layoutX="7.0" layoutY="6.0" prefHeight="69.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
-                  <tabs>
-                    <Tab text="Label">
-                      <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                      </content>
-                    </Tab>
-                    <Tab text="Category">
-                      <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                      </content>
-                    </Tab>
-                  </tabs>
-                </TabPane>
-              </children>
-            </AnchorPane>
-          </items>
-        </SplitPane>
+        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+          <children>
+            <SplitPane dividerPositions="0.7892976588628764" prefHeight="600.0" prefWidth="800.0">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0">
+                  <children>
+                    <SplitPane dividerPositions="0.25882352941176473" prefHeight="600.0" prefWidth="626.0">
+                      <items>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                          <children>
+                            <ListView layoutX="8.0" layoutY="13.0" prefHeight="572.0" prefWidth="142.0" />
+                          </children>
+                        </AnchorPane>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                          <children>
+                            <ListView layoutX="11.0" layoutY="13.0" prefHeight="572.0" prefWidth="435.0" />
+                          </children>
+                        </AnchorPane>
+                      </items>
+                    </SplitPane>
+                  </children></AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0">
+                  <children>
+                    <TabPane layoutX="7.0" layoutY="6.0" maxHeight="1.7976931348623157E308" prefHeight="69.0" prefWidth="195.0" tabClosingPolicy="UNAVAILABLE">
+                      <tabs>
+                        <Tab text="Label">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                          </content>
+                        </Tab>
+                        <Tab text="Category">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                          </content>
+                        </Tab>
+                      </tabs>
+                    </TabPane>
+                  </children>
+                </AnchorPane>
+              </items>
+            </SplitPane>
+          </children>
+        </AnchorPane>
       </children>
     </AnchorPane>
   </children>
