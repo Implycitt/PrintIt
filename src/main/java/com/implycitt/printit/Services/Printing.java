@@ -1,5 +1,7 @@
 package com.implycitt.printit.Services;
 
+import java.awt.print.PageFormat;
+import java.awt.print.Paper;
 import java.awt.print.PrinterException;
 import java.io.IOException;
 import java.util.*;
@@ -7,6 +9,7 @@ import java.util.*;
 import javax.print.PrintService;
 import javax.print.PrintServiceLookup;
 
+import javafx.print.Printer;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.printing.PDFPageable;
@@ -20,49 +23,51 @@ import java.io.File;
   public class Printing
   {
 
-    public static Queue<String> printerQueue = new ArrayDeque<String>();
-    public static PrinterJob printJob = PrinterJob.getPrinterJob();
-    public static PrintService defaultPrinter = null;
-    public static PaperSource printerSource = null;
+    public static Queue<ItemLabel> printerQueue = new ArrayDeque<String>();
+    public static Printer defaultPrinter = Printer.getDefaultPrinter();
+    public static Set<PaperSource> supportedSources = getPrinterSources();
+    public static PaperSource defaultSource = supportedSources.iterator().next();
 
-    public void addToQueue(String path)
+    public void addToQueue(ItemLabel itemLabel)
     {
-      printerQueue.add(path);
+      printerQueue.add(itemLabel);
     }
 
-    public void startPrintQueue() throws PrinterException, IOException {
+    public void startPrintQueue() throws PrinterException, IOException
+    {
       while (!printerQueue.isEmpty())
       {
-        printSingle();
+        ItemLabel topLabel = printerQueue.remove();
+        printSingle(topLabel.url);
       }
     }
 
-    public static void printSingle() throws PrinterException, IOException {
-      File file = new File(printerQueue.remove());
-      PDDocument document = Loader.loadPDF(file);
+    public static void printSingle(String location) throws IOException, PrinterException {
+      File printedFile = new File(location);
+      PDDocument document = Loader.loadPDF(printedFile);
+
+      PrinterJob printJob = PrinterJob.getPrinterJob();
       printJob.setPageable(new PDFPageable(document));
-      printJob.setPrintService(defaultPrinter);
       printJob.print();
     }
-
 
     public static PrintService[] getPrintersAvailable()
     {
       return PrintServiceLookup.lookupPrintServices(null, null);
     }
 
-    public static void setPrinter(PrintService printer)
+    public static void setPrinter(Printer printer)
     {
       defaultPrinter = printer;
     }
 
     public static Set<PaperSource> getPrinterSources()
     {
-      return null;
+      return defaultPrinter.getPrinterAttributes().getSupportedPaperSources();
     }
 
     public static void setPrinterSource(PaperSource newSource)
     {
-      printerSource = newSource;
+      defaultSource = newSource;
     }
 }
