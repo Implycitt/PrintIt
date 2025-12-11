@@ -11,7 +11,8 @@ import java.util.ArrayList;
 
 public class Database {
 
-  public static String url = "jdbc:sqlite:" + "C:\\Program Files (x86)" + File.separator + "labels.db";
+  // wont open when it goes in the c drive -> fix later;
+  public static String url = "jdbc:sqlite:labels.db";
 
   public static void createDatabase()
   {
@@ -26,6 +27,7 @@ public class Database {
   public static void checkDatabase()
   {
     File database = new File(url);
+
     if (database.exists())
     {
       return;

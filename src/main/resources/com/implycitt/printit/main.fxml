@@ -19,7 +19,7 @@
       xmlns:fx="http://javafx.com/fxml"
       prefHeight="600.0"
       prefWidth="800.0"
-      fx:controller="com.implycitt.printit.controllers.MainController">
+      fx:controller="com.implycitt.printit.Controllers.MainController">
   <children>
     <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
@@ -45,22 +45,20 @@
                     </SplitPane>
                   </children></AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0">
-                  <children>
-                    <TabPane layoutX="7.0" layoutY="6.0" maxHeight="1.7976931348623157E308" prefHeight="69.0" prefWidth="195.0" tabClosingPolicy="UNAVAILABLE">
-                      <tabs>
-                        <Tab text="Label">
-                          <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                          </content>
+                  <VBox spacing="5">
+                    <children>
+                      <TabPane layoutX="7.0" layoutY="6.0" maxHeight="1.7976931348623157E308" prefHeight="69.0"
+                               prefWidth="195.0" tabClosingPolicy="UNAVAILABLE">
+                        <Tab text="Label" fx:id="labelTab">
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
                         </Tab>
-                        <Tab text="Category">
-                          <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                          </content>
+                        <Tab text="Category" fx:id="categoryTab">
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
                         </Tab>
-                      </tabs>
-                    </TabPane>
-                  </children>
+                      </TabPane>
+                      <AnchorPane fx:id="rightSidebar"></AnchorPane>
+                    </children>
+                  </VBox>
                 </AnchorPane>
               </items>
             </SplitPane>
