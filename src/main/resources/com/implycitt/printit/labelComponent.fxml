@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Text?>
+<fx:root fx:id="LabelComponent" type="Pane" xmlns:fx="http://javafx.com/fxml" fx:controller="com.implycitt.printit.Controllers.LabelController">
+  <HBox>
+    <Button fx:id="editbutton" onAction="#EditLabel">Edit</Button>
+    <Button fx:id="deletebutton" onAction="#RemoveLabel">Delete</Button>
+  </HBox>
+  <Text fx:id="LabelName">Hello</Text>
+  <Text fx:id="Count" text="1"/>
+  <HBox>
+    <Button fx:id="incrementbutton" onAction="#Decrement">-</Button>
+    <Button fx:id="decrementbutton" onAction="#Increment">+</Button>
+  </HBox>
+  <Button fx:id="printbutton" onAction="#PrintLabel">print</Button>
+</fx:root>

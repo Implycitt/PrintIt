@@ -41,7 +41,7 @@ public class Database {
     executeQuery(sql);
   }
 
-  public static ItemLabel GenericGet(String fieldSearching, String table, String labelField) {
+  public static ItemLabel genericGet(String fieldSearching, String table, String labelField) {
     String sql = String.format("SELECT * FROM %s WHERE %s = ?", table, fieldSearching);
     try (var connection = DriverManager.getConnection(url);
          var statement = connection.prepareStatement(sql)) {

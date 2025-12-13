@@ -6,6 +6,6 @@
 
 <fx:root type="AnchorPane" xmlns:fx="http://javafx.com/fxml">
   <TextField layoutX="8.0" layoutY="153.0" />
-  <Button layoutX="56.0" layoutY="558.0" mnemonicParsing="false" text="Add" />
+  <Button layoutX="56.0" layoutY="450.0" mnemonicParsing="false" text="Add" />
   <Text layoutX="15.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" />
 </fx:root>

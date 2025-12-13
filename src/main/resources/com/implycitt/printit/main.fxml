@@ -33,12 +33,12 @@
                       <items>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                           <children>
-                            <ListView layoutX="8.0" layoutY="13.0" prefHeight="572.0" prefWidth="142.0" />
+                            <ListView layoutX="8.0" layoutY="13.0" prefHeight="572.0" prefWidth="142.0" fx:id="categoryList"/>
                           </children>
                         </AnchorPane>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                           <children>
-                            <ListView layoutX="11.0" layoutY="13.0" prefHeight="572.0" prefWidth="435.0" />
+                            <VBox layoutX="11.0" layoutY="13.0" prefHeight="572.0" prefWidth="435.0" fx:id="labelsList"/>
                           </children>
                         </AnchorPane>
                       </items>

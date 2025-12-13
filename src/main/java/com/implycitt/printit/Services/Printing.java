@@ -29,12 +29,12 @@ import java.io.File;
     public static Set<PaperSource> supportedSources = getPrinterSources();
     public static PaperSource defaultSource = supportedSources.iterator().next();
 
-    public void addToQueue(ItemLabel itemLabel)
+    public static void addToQueue(ItemLabel itemLabel)
     {
       printerQueue.add(itemLabel);
     }
 
-    public void startPrintQueue() throws PrinterException, IOException
+    public static void startPrintQueue() throws PrinterException, IOException
     {
       while (!printerQueue.isEmpty())
       {

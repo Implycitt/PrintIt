@@ -10,7 +10,7 @@
 <fx:root type="AnchorPane" xmlns:fx="http://javafx.com/fxml">
   <ChoiceBox layoutX="7.0" layoutY="101.0" prefWidth="150.0" />
   <TextField layoutX="8.0" layoutY="153.0" />
-  <Button layoutX="56.0" layoutY="558.0" mnemonicParsing="false" text="Add" />
+  <Button layoutX="56.0" layoutY="450.0" mnemonicParsing="false" text="Add" />
   <Button layoutX="8.0" layoutY="205.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="34.0" />
   <TextField layoutX="7.0" layoutY="255.0" />
   <TextField layoutX="8.0" layoutY="307.0" />

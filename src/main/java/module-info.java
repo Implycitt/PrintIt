@@ -9,6 +9,7 @@ module com.implycitt.printit {
   requires java.desktop;
   requires org.apache.pdfbox;
   requires java.sql;
+  requires javafx.graphics;
 
   opens com.implycitt.printit to javafx.fxml;
     exports com.implycitt.printit;
