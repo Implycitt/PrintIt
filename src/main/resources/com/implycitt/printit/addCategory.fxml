@@ -4,8 +4,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
 
-<fx:root type="AnchorPane" xmlns:fx="http://javafx.com/fxml">
-  <TextField layoutX="8.0" layoutY="153.0" />
-  <Button layoutX="56.0" layoutY="450.0" mnemonicParsing="false" text="Add" />
+<fx:root type="AnchorPane" xmlns:fx="http://javafx.com/fxml" fx:controller="com.implycitt.printit.Controllers.AddCategoryController">
+  <TextField layoutX="8.0" fx:id="nameTextField" layoutY="153.0" />
+  <Button fx:id="addCategory" layoutX="56.0" layoutY="450.0" mnemonicParsing="false" text="Add" onAction="#createCategory" />
   <Text layoutX="15.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" />
 </fx:root>

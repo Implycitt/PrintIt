@@ -13,7 +13,6 @@ public class AddLabel extends AnchorPane
   {
     FXMLLoader fxmlLoader = new FXMLLoader(Window.class.getResource("addLabel.fxml"));
     fxmlLoader.setRoot(this);
-    fxmlLoader.setController(this);
 
     try {
       fxmlLoader.load();

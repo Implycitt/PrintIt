@@ -38,7 +38,12 @@ public class Database {
   public static void createTable(String table)
   {
     String sql = String.format("CREATE TABLE IF NOT EXISTS %s(id INTEGER PRIMARY KEY, primaryName text NOT NULL, otherNames text, subcategories text, url text NOT NULL, tags text)", table);
-    executeQuery(sql);
+    try (var connection = DriverManager.getConnection(url);
+         var prepareStatement = connection.createStatement()) {
+      prepareStatement.executeUpdate(sql);
+    } catch (SQLException e) {
+      System.err.println(e.getMessage());
+    }
   }
 
   public static ItemLabel genericGet(String fieldSearching, String table, String labelField) {
@@ -144,6 +149,17 @@ public class Database {
     // this is really ugly but like it works so, maybe fix at some point: searching parameter has to be surrounded with %
     String sql = String.format("SELECT * FROM %s WHERE primaryName LIKE ", table) + "%" + String.format("%s",searchText) + "%";
     return getAndTransform(executeQuery(sql));
+  }
+
+  public static ArrayList<ItemLabel> searchAllTables() throws SQLException
+  {
+    ArrayList<ItemLabel> allLabels = new ArrayList<>();
+    ArrayList<String> tables = getAllTables();
+    for (String table : tables)
+    {
+      allLabels.addAll(getAllEntriesInTable(table));
+    }
+    return allLabels;
   }
 
   public static ResultSet executeQuery(String query)

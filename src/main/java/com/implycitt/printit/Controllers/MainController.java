@@ -10,12 +10,13 @@ import javafx.scene.control.Tab;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.application.Application;
+import javafx.application.Platform;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import static com.implycitt.printit.Services.Database.getAllEntriesInTable;
-import static com.implycitt.printit.Services.Database.getAllTables;
+import com.implycitt.printit.Services.Database;
 
 public class MainController {
 
@@ -34,7 +35,7 @@ public class MainController {
   @FXML
   private VBox labelsList;
 
-  ArrayList<String> tables = getAllTables();
+  ArrayList<String> tables = Database.getAllTables();
   ArrayList<ItemLabel> itemLabels;
 
   public void initialize()
@@ -66,14 +67,30 @@ public class MainController {
       }
     });
 
+    Thread thread = new Thread(() -> {
+      try {
+        Thread.sleep(100);
+      } catch (InterruptedException exc) {
+        throw new Error("Unexpected interruption");
+      }
+      Platform.runLater(() -> updateSideView());
+    });
+    thread.setDaemon(true);
+    thread.start();
+  }
+
+  private void updateSideView() 
+  {
     categoryList.getItems().addAll(tables);
 
     categoryList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
       try{
-        itemLabels = getAllEntriesInTable(categoryList.getSelectionModel().getSelectedItem());
+        itemLabels = Database.getAllEntriesInTable(categoryList.getSelectionModel().getSelectedItem());
       } catch (SQLException e) {
         System.err.println(e.getMessage());
       }
     });
   }
 }
+
+

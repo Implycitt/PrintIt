@@ -14,7 +14,6 @@ public class AddCategory extends AnchorPane
   {
     FXMLLoader fxmlLoader = new FXMLLoader(Window.class.getResource("addCategory.fxml"));
     fxmlLoader.setRoot(this);
-    fxmlLoader.setController(this);
 
     try {
       fxmlLoader.load();
