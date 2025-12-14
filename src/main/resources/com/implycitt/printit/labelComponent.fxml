@@ -7,12 +7,12 @@
 <?import javafx.scene.layout.*?>
 
 <?import javafx.scene.text.Text?>
-<fx:root fx:id="LabelComponent" type="Pane" xmlns:fx="http://javafx.com/fxml" fx:controller="com.implycitt.printit.Controllers.LabelController">
+<fx:root fx:id="LabelComponent" type="VBox" xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx" fx:controller="com.implycitt.printit.Controllers.LabelController">
   <HBox>
     <Button fx:id="editbutton" onAction="#EditLabel">Edit</Button>
     <Button fx:id="deletebutton" onAction="#RemoveLabel">Delete</Button>
   </HBox>
-  <Text fx:id="LabelName">Hello</Text>
+  <Text fx:id="LabelName"/>
   <Text fx:id="Count" text="1"/>
   <HBox>
     <Button fx:id="incrementbutton" onAction="#Decrement">-</Button>

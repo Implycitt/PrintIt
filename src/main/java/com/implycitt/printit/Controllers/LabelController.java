@@ -1,8 +1,16 @@
 package com.implycitt.printit.Controllers;
 
+import com.implycitt.printit.Models.ItemLabel;
+import com.implycitt.printit.Services.Database;
+import com.implycitt.printit.Services.Printing;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.text.Text;
+
+import java.awt.print.PrinterException;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class LabelController {
   @FXML
@@ -15,12 +23,6 @@ public class LabelController {
   private ListView categoryList;
 
   private int counter;
-
-  @FXML
-  private void initialize()
-  {
-    System.out.println(LabelName);
-  }
 
   @FXML
   protected void Increment()
@@ -37,9 +39,10 @@ public class LabelController {
   }
 
   @FXML
-  protected void PrintLabel()
-  {
-    System.out.println("going to have to rewrite some stuff");
+  protected void PrintLabel() throws SQLException, PrinterException, IOException {
+    ArrayList<ItemLabel> label = Database.genericSearch(LabelName.getText());
+    Printing.addToQueue(label.getFirst());
+    Printing.startPrintQueue();
   }
 
   @FXML
@@ -52,5 +55,10 @@ public class LabelController {
   protected void EditLabel()
   {
     System.out.println(LabelName);
+  }
+
+  public void setLabelName(String name)
+  {
+    LabelName.setText(name);
   }
 }

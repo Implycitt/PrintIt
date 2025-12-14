@@ -4,19 +4,23 @@ import com.implycitt.printit.Components.AddCategory;
 import com.implycitt.printit.Components.AddLabel;
 import com.implycitt.printit.Components.LabelComponent;
 import com.implycitt.printit.Models.ItemLabel;
+import javafx.animation.AnimationTimer;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
-import javafx.application.Application;
-import javafx.application.Platform;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.implycitt.printit.Services.Database;
+import javafx.scene.text.Text;
 
 public class MainController {
 
@@ -35,62 +39,101 @@ public class MainController {
   @FXML
   private VBox labelsList;
 
+  @FXML
+  private TextField searchBar;
+
   ArrayList<String> tables = Database.getAllTables();
   ArrayList<ItemLabel> itemLabels;
+  ArrayList<ItemLabel> allLabels = new ArrayList<>();
 
-  public void initialize()
-  {
+  public void initialize() {
 
     AddLabel label = new AddLabel();
     rightSidebar.getChildren().add(label);
 
-    LabelComponent labelComponent = new LabelComponent();
-    labelsList.getChildren().add(labelComponent);
-
-    LabelComponent labelComponent2 = new LabelComponent();
-    labelsList.getChildren().add(labelComponent2);
+    try {
+      for (String table : Database.getAllTables())
+      {
+        allLabels.addAll(Database.getAllEntriesInTable(table));
+      }
+      for (ItemLabel itemLabel : allLabels)
+      {
+        LabelComponent currLabel = new LabelComponent(itemLabel.primaryName);
+      }
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+    for (ItemLabel itemLabel : allLabels) {
+      LabelComponent newLabel = new LabelComponent(itemLabel.primaryName);
+      labelsList.getChildren().add(newLabel);
+    }
 
     labelTab.selectedProperty().addListener((observable, oldValue, newValue) -> {
-      if(newValue)
-      {
+      if (newValue) {
         rightSidebar.getChildren().clear();
         rightSidebar.getChildren().add(label);
       }
     });
 
     categoryTab.selectedProperty().addListener((observable, oldValue, newValue) -> {
-      if(newValue)
-      {
+      if (newValue) {
         AddCategory category = new AddCategory();
         rightSidebar.getChildren().clear();
         rightSidebar.getChildren().add(category);
       }
     });
 
-    Thread thread = new Thread(() -> {
-      try {
-        Thread.sleep(100);
-      } catch (InterruptedException exc) {
-        throw new Error("Unexpected interruption");
-      }
-      Platform.runLater(() -> updateSideView());
-    });
-    thread.setDaemon(true);
-    thread.start();
-  }
-
-  private void updateSideView() 
-  {
     categoryList.getItems().addAll(tables);
 
     categoryList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-      try{
+      try {
         itemLabels = Database.getAllEntriesInTable(categoryList.getSelectionModel().getSelectedItem());
+        labelsList.getChildren().clear();
+        for (ItemLabel itemLabel : itemLabels) {
+          LabelComponent newLabel = new LabelComponent(itemLabel.primaryName);
+          labelsList.getChildren().add(newLabel);
+        }
       } catch (SQLException e) {
         System.err.println(e.getMessage());
       }
     });
+
+    searchBar.textProperty().addListener((observable, oldValue, newValue) -> {
+      if (newValue.length() > 0) {
+        labelsList.getChildren().clear();
+        try {
+          allLabels = Database.genericSearch(newValue);
+        } catch (SQLException e) {
+          throw new RuntimeException(e);
+        }
+        if (allLabels.size() == 0)
+        {
+          Text noLabels = new Text("No labels found...");
+          labelsList.getChildren().clear();
+          labelsList.getChildren().add(noLabels);
+        }
+        for (ItemLabel itemLabel : allLabels) {
+          LabelComponent newLabel = new LabelComponent(itemLabel.primaryName);
+          labelsList.getChildren().add(newLabel);
+        }
+      } else {
+        try {
+          labelsList.getChildren().clear();
+          for (String table : Database.getAllTables())
+          {
+            allLabels.addAll(Database.getAllEntriesInTable(table));
+          }
+          for (ItemLabel itemLabel : allLabels)
+          {
+            LabelComponent currLabel = new LabelComponent(itemLabel.primaryName);
+          }
+        } catch (SQLException e) {
+          throw new RuntimeException(e);
+        }
+      }
+    });
   }
+
 }
 
 

@@ -1,25 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
+<?import java.net.URL?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.control.ButtonBar?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.Tab?>
-<?import java.net.URL?>
-<VBox alignment="CENTER"
-      spacing="20.0"
-      xmlns:fx="http://javafx.com/fxml"
-      prefHeight="600.0"
-      prefWidth="800.0"
-      fx:controller="com.implycitt.printit.Controllers.MainController">
+<VBox alignment="CENTER" prefHeight="600.0" prefWidth="800.0" spacing="20.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/25" fx:controller="com.implycitt.printit.Controllers.MainController">
   <children>
     <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
@@ -33,12 +23,13 @@
                       <items>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                           <children>
-                            <ListView layoutX="8.0" layoutY="13.0" prefHeight="572.0" prefWidth="142.0" fx:id="categoryList"/>
+                            <ListView fx:id="categoryList" layoutX="8.0" layoutY="13.0" prefHeight="572.0" prefWidth="142.0" />
                           </children>
                         </AnchorPane>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                           <children>
-                            <VBox layoutX="11.0" layoutY="13.0" prefHeight="572.0" prefWidth="435.0" fx:id="labelsList"/>
+                            <VBox fx:id="labelsList" layoutX="11.0" layoutY="46.0" prefHeight="539.0" prefWidth="435.0" />
+                            <TextField fx:id="searchBar" layoutX="11.0" layoutY="14.0" prefHeight="25.0" prefWidth="436.0" promptText="Search for a label..."/>
                           </children>
                         </AnchorPane>
                       </items>
@@ -47,16 +38,15 @@
                 <AnchorPane minHeight="0.0" minWidth="0.0">
                   <VBox spacing="5">
                     <children>
-                      <TabPane layoutX="7.0" layoutY="6.0" maxHeight="1.7976931348623157E308" prefHeight="69.0"
-                               prefWidth="195.0" tabClosingPolicy="UNAVAILABLE">
-                        <Tab text="Label" fx:id="labelTab">
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
+                      <TabPane layoutX="7.0" layoutY="6.0" maxHeight="1.7976931348623157E308" prefHeight="69.0" prefWidth="195.0" tabClosingPolicy="UNAVAILABLE">
+                        <Tab fx:id="labelTab" text="Label">
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                         </Tab>
-                        <Tab text="Category" fx:id="categoryTab">
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
+                        <Tab fx:id="categoryTab" text="Category">
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                         </Tab>
                       </TabPane>
-                      <AnchorPane fx:id="rightSidebar"></AnchorPane>
+                      <AnchorPane fx:id="rightSidebar" />
                     </children>
                   </VBox>
                 </AnchorPane>
@@ -68,7 +58,7 @@
     </AnchorPane>
   </children>
   <stylesheets>
-    <URL value="@../style/base.css"/>
-    <URL value="@../style/main.css"/>
+    <URL value="@../style/base.css" />
+    <URL value="@../style/main.css" />
   </stylesheets>
 </VBox>

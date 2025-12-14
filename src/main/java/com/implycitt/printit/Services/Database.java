@@ -37,7 +37,7 @@ public class Database {
 
   public static void createTable(String table)
   {
-    String sql = String.format("CREATE TABLE IF NOT EXISTS %s(id INTEGER PRIMARY KEY, primaryName text NOT NULL, otherNames text, subcategories text, url text NOT NULL, tags text)", table);
+    String sql = String.format("CREATE TABLE IF NOT EXISTS %s(id INTEGER PRIMARY KEY, primaryName text NOT NULL, otherNames text, subcategories text, url text NOT NULL, type text)", table);
     try (var connection = DriverManager.getConnection(url);
          var prepareStatement = connection.createStatement()) {
       prepareStatement.executeUpdate(sql);
@@ -74,7 +74,8 @@ public class Database {
 
   public static void addToDatabase(ItemLabel label, String table)
   {
-    String sql = String.format("INSERT INTO %s(id, primaryName, otherNames, subcategories, url, tags) VALUES(?, ?, ?, ?, ?, ?)", table);
+    String sql = String.format("INSERT INTO %s(id, primaryName, otherNames, subcategories, url, type) VALUES(?, ?, ?, ?, ?, ?)", table);
+
     try (var connection = DriverManager.getConnection(url);
          var ps = connection.prepareStatement(sql)) {
       ps.setInt(1, label.id);
@@ -95,7 +96,7 @@ public class Database {
     {
       addToDatabase(newLabel, table);
     } else {
-      String sql = String.format("UPDATE %s SET primaryName = ?, otherNames = ?, subcategories = ?, url = ?, tags = ? WHERE id = ?", table);
+      String sql = String.format("UPDATE %s SET primaryName = ?, otherNames = ?, subcategories = ?, url = ?, type = ? WHERE id = ?", table);
       try (var connection = DriverManager.getConnection(url);
            var ps = connection.prepareStatement(sql)) {
         ps.setString(1, newLabel.primaryName);
@@ -141,21 +142,64 @@ public class Database {
   }
 
   public static ArrayList<ItemLabel> getAllEntriesInTable(String table) throws SQLException {
+    ArrayList<ItemLabel> allLabels = new ArrayList<>();
     String sql = String.format("SELECT * FROM %s", table);
-    return getAndTransform(executeQuery(sql));
+    try (var connection = DriverManager.getConnection(url);
+         var prepareStatement = connection.prepareStatement(sql)) {
+      var rs = prepareStatement.executeQuery();
+      while (rs.next()) {
+        ItemLabel currentLabel = new ItemLabel(
+          rs.getString("primaryName"),
+          rs.getString("otherNames"),
+          rs.getString("url"),
+          rs.getString("subcategories"),
+          rs.getString("type")
+        );
+        allLabels.add(currentLabel);
+      }
+    } catch (SQLException e) {
+      System.err.println(e.getMessage());
+    }
+    return allLabels;
   }
 
   public static ArrayList<ItemLabel> searchForEntries(String table, String searchText) throws SQLException {
     // this is really ugly but like it works so, maybe fix at some point: searching parameter has to be surrounded with %
-    String sql = String.format("SELECT * FROM %s WHERE primaryName LIKE ", table) + "%" + String.format("%s",searchText) + "%";
+    String sql = String.format("SELECT * FROM %s WHERE primaryName LIKE ", table) + "'%" + String.format("%s",searchText) + "%'" ;
     return getAndTransform(executeQuery(sql));
+  }
+
+  public static ArrayList<ItemLabel> genericSearch(String searchText) throws SQLException
+  {
+    ArrayList<ItemLabel> allLabels = new ArrayList<>();
+    ArrayList<String> tables = getAllTables();
+    for (String table : tables)
+    {
+      String sql = String.format("SELECT * FROM %s WHERE primaryName LIKE ", table) + "'%" + String.format("%s",searchText) + "%'" ;
+      try (var connection = DriverManager.getConnection(url);
+           var prepareStatement = connection.createStatement()) {
+        var rs = prepareStatement.executeQuery(sql);
+        while (rs.next()) {
+          ItemLabel currentLabel = new ItemLabel(
+            rs.getString("primaryName"),
+            rs.getString("otherNames"),
+            rs.getString("url"),
+            rs.getString("subcategories"),
+            rs.getString("type")
+          );
+          allLabels.add(currentLabel);
+        }
+      } catch (SQLException e) {
+        System.err.println(e.getMessage());
+      }
+    }
+    return allLabels;
   }
 
   public static ArrayList<ItemLabel> searchAllTables() throws SQLException
   {
     ArrayList<ItemLabel> allLabels = new ArrayList<>();
-    ArrayList<String> tables = getAllTables();
-    for (String table : tables)
+    for (String table : getAllTables())
     {
       allLabels.addAll(getAllEntriesInTable(table));
     }
@@ -179,13 +223,13 @@ public class Database {
     ArrayList<ItemLabel> labelList = new ArrayList<ItemLabel>();
     while (rs.next()) {
       ItemLabel currentLabel = new ItemLabel(
-        rs.getInt("id"),
         rs.getString("primaryName"),
         rs.getString("otherNames"),
         rs.getString("url"),
         rs.getString("subcategories"),
         rs.getString("type")
       );
+      System.out.println("currentLabel: " + currentLabel);
       labelList.add(currentLabel);
     }
     return labelList;

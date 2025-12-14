@@ -17,7 +17,7 @@ public class AddCategoryController
   @FXML
   protected void createCategory()
   {
-    String categoryName = (String) nameTextField.getText();
+    String categoryName = nameTextField.getText();
     if(categoryName != "")
     {
       Database.createTable(categoryName);
