@@ -1,7 +1,5 @@
 package com.implycitt.printit.Models;
 
-import java.util.Arrays;
-
 public class ItemLabel
 {
   public Integer id;
@@ -11,9 +9,9 @@ public class ItemLabel
   public String[] subcategories;
   public String type;
 
-  public ItemLabel(Integer id, String primaryName, String otherNames, String url, String subcategories, String type)
+  public ItemLabel(String primaryName, String otherNames, String url, String subcategories, String type)
   {
-    this.id = id;
+    this.id = (int) (Math.random() * 100000000);
     this.primaryName = primaryName;
     this.otherNames = turnTextIntoArray(otherNames);
     this.url = url;

@@ -1,8 +1,0 @@
-.root {
-    -fx-background-color: "black";
-}
-
-.label {
-    -fx-border-style: solid;
-    --border-color: black;
-}
