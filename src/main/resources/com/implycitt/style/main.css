@@ -1,3 +1,295 @@
-#LabelComponent{
-    -fx-border-style: solid;
+.root {
+    -fx-app-bg:        #F1F2F6;
+    -fx-surface:       #FFFFFF;
+    -fx-border-subtle: #E2E4EB;
+    -fx-ink:           #20232B;
+    -fx-ink-muted:     #868C99;
+    -fx-accent:        #3654D6;
+    -fx-accent-hover:  #2C46B8;
+    -fx-danger:        #E5484D;
+    -fx-danger-hover:  #C93F44;
+
+    -fx-background-color: -fx-app-bg;
+    -fx-font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    -fx-font-size: 13px;
+    -fx-text-fill: -fx-ink;
+}
+
+Text, .text {
+    -fx-fill: -fx-ink;
+}
+
+.split-pane {
+    -fx-background-color: -fx-app-bg;
+    -fx-padding: 0;
+}
+
+.split-pane > .split-pane-divider {
+    -fx-background-color: -fx-border-subtle;
+    -fx-padding: 0 1 0 1;
+}
+
+.list-view {
+    -fx-background-color: -fx-surface;
+    -fx-background-insets: 0;
+    -fx-background-radius: 10;
+    -fx-border-color: -fx-border-subtle;
+    -fx-border-radius: 10;
+    -fx-padding: 6 0 6 0;
+}
+
+.list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: -fx-ink;
+    -fx-font-size: 15px;
+    -fx-alignment: CENTER;
+    -fx-padding: 14 12 14 12;
+    -fx-border-width: 0 0 0 4;
+    -fx-border-color: transparent;
+}
+
+.list-cell:filled:hover {
+    -fx-background-color: derive(-fx-accent, 92%);
+}
+
+.list-cell:filled:selected {
+    -fx-background-color: derive(-fx-accent, 88%);
+    -fx-border-color: transparent transparent transparent -fx-accent;
+    -fx-text-fill: -fx-accent;
+    -fx-font-weight: bold;
+}
+
+.search-field {
+    -fx-background-color: -fx-surface;
+    -fx-background-radius: 18;
+    -fx-border-color: -fx-border-subtle;
+    -fx-border-radius: 18;
+    -fx-padding: 7 16 7 16;
+    -fx-prompt-text-fill: -fx-ink-muted;
+}
+
+.search-field:focused {
+    -fx-border-color: -fx-accent;
+}
+
+.text-field,
+.choice-box {
+    -fx-background-color: -fx-surface;
+    -fx-background-radius: 6;
+    -fx-border-color: -fx-border-subtle;
+    -fx-border-radius: 6;
+    -fx-padding: 6 10 6 10;
+    -fx-prompt-text-fill: -fx-ink-muted;
+}
+
+.text-field:focused,
+.choice-box:focused {
+    -fx-border-color: -fx-accent;
+}
+
+.choice-box .label {
+    -fx-text-fill: -fx-ink;
+}
+
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: -fx-app-bg;
+}
+
+.scroll-bar:vertical, .scroll-bar:horizontal {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar .track,
+.scroll-bar .track-background {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: derive(-fx-ink-muted, 40%);
+    -fx-background-radius: 6;
+}
+
+.scroll-bar .thumb:hover {
+    -fx-background-color: -fx-ink-muted;
+}
+
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button {
+    -fx-padding: 0;
+    -fx-background-color: transparent;
+}
+
+.tab-pane .tab-header-area {
+    -fx-padding: 6 0 0 8;
+}
+
+.tab-pane .tab-header-background {
+    -fx-background-color: -fx-app-bg;
+}
+
+.tab-pane .tab {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
+    -fx-border-width: 0 0 2 0;
+    -fx-border-color: transparent;
+    -fx-padding: 8 16 8 16;
+}
+
+.tab-pane .tab:selected {
+    -fx-border-color: -fx-accent;
+}
+
+.tab-pane .tab-label {
+    -fx-text-fill: -fx-ink-muted;
+    -fx-font-weight: bold;
+}
+
+.tab-pane .tab:selected .tab-label {
+    -fx-text-fill: -fx-accent;
+}
+
+.tab-pane .tab-content-area {
+    -fx-background-color: -fx-surface;
+}
+
+.tab-pane:focused,
+.tab-pane .tab:selected .focus-indicator {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.button {
+    -fx-background-color: -fx-surface;
+    -fx-border-color: -fx-border-subtle;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-padding: 6 14 6 14;
+    -fx-text-fill: -fx-ink;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-border-color: -fx-accent;
+    -fx-text-fill: -fx-accent;
+}
+
+.button:armed {
+    -fx-background-color: derive(-fx-accent, 88%);
+}
+
+.button.primary {
+    -fx-background-color: -fx-accent;
+    -fx-border-color: -fx-accent;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.button.primary:hover {
+    -fx-background-color: -fx-accent-hover;
+    -fx-border-color: -fx-accent-hover;
+    -fx-text-fill: white;
+}
+
+.button.danger {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-text-fill: -fx-danger;
+}
+
+.button.danger:hover {
+    -fx-background-color: derive(-fx-danger, 90%);
+    -fx-border-color: transparent;
+    -fx-text-fill: -fx-danger-hover;
+}
+
+.button .text {
+    -fx-fill: -fx-ink;
+}
+
+.button:hover .text {
+    -fx-fill: -fx-accent;
+}
+
+.button.primary .text,
+.button.primary:hover .text {
+    -fx-fill: white;
+}
+
+.button.danger .text {
+    -fx-fill: -fx-danger;
+}
+
+.button.danger:hover .text {
+    -fx-fill: -fx-danger-hover;
+}
+
+.sidebar-title {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-ink-muted;
+    -fx-padding: 0 0 2 4;
+}
+
+.button.ghost {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.button.ghost .text {
+    -fx-fill: -fx-ink-muted;
+}
+
+.button.ghost:hover {
+    -fx-background-color: derive(-fx-ink-muted, 92%);
+}
+
+.button.ghost:hover .text {
+    -fx-fill: -fx-ink;
+}
+
+.label-card {
+    -fx-background-color: -fx-surface;
+    -fx-background-radius: 0 10 10 0;
+    -fx-border-radius: 0 10 10 0;
+    -fx-border-width: 0 1 1 4;
+    -fx-border-color: -fx-border-subtle -fx-border-subtle -fx-border-subtle -fx-accent;
+    -fx-effect: dropshadow(gaussian, rgba(32,35,43,0.07), 8, 0, 0, 2);
+}
+
+.label-card:hover {
+    -fx-border-color: -fx-border-subtle -fx-border-subtle -fx-border-subtle -fx-accent-hover;
+    -fx-effect: dropshadow(gaussian, rgba(32,35,43,0.12), 10, 0, 0, 3);
+}
+
+#LabelName {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-fill: -fx-ink;
+}
+
+#Count {
+    -fx-font-size: 12px;
+    -fx-fill: -fx-ink-muted;
+}
+
+.form-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-ink;
+}
+
+.form-label {
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-ink-muted;
+}
+
+.form-hint {
+    -fx-fill: -fx-ink-muted;
 }

@@ -1,6 +1,6 @@
 package com.implycitt.printit;
 
-import com.implycitt.printit.Services.Database;
+import com.implycitt.printit.services.Database;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -13,7 +13,7 @@ public class Window extends Application {
     public void start(Stage stage) throws IOException {
       Database.checkDatabase();
       FXMLLoader fxmlLoader = new FXMLLoader(Window.class.getResource("main.fxml"));
-      Scene scene = new Scene(fxmlLoader.load(), 800, 600);
+      Scene scene = new Scene(fxmlLoader.load(), 1000, 800);
       stage.setTitle("PrintIT");
       stage.setScene(scene);
       stage.show();

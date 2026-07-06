@@ -2,21 +2,36 @@
 
 <?import java.lang.*?>
 <?import java.util.*?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
 <?import javafx.scene.text.Text?>
-<fx:root fx:id="LabelComponent" type="VBox" xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx" fx:controller="com.implycitt.printit.Controllers.LabelController">
-  <HBox>
-    <Button fx:id="editbutton" onAction="#EditLabel">Edit</Button>
-    <Button fx:id="deletebutton" onAction="#RemoveLabel">Delete</Button>
-  </HBox>
-  <Text fx:id="LabelName"/>
-  <Text fx:id="Count" text="1"/>
-  <HBox>
-    <Button fx:id="incrementbutton" onAction="#Decrement">-</Button>
-    <Button fx:id="decrementbutton" onAction="#Increment">+</Button>
-  </HBox>
-  <Button fx:id="printbutton" onAction="#PrintLabel">print</Button>
+
+<fx:root type="VBox" spacing="10.0" styleClass="label-card"
+         xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx"
+         fx:controller="com.implycitt.printit.controllers.LabelController">
+  <padding>
+    <Insets top="12.0" right="14.0" bottom="12.0" left="14.0" />
+  </padding>
+  <children>
+    <HBox alignment="CENTER_LEFT" spacing="10.0">
+      <children>
+        <Text fx:id="LabelName" />
+        <Region HBox.hgrow="ALWAYS" />
+        <Button fx:id="editbutton" text="Edit" onAction="#EditLabel" />
+        <Button fx:id="deletebutton" text="Delete" onAction="#RemoveLabel" styleClass="danger" />
+      </children>
+    </HBox>
+
+    <HBox alignment="CENTER_LEFT" spacing="10.0">
+      <children>
+        <Button fx:id="decrementbutton" text="−" onAction="#Decrement" />
+        <Text fx:id="Count" text="1" />
+        <Button fx:id="incrementbutton" text="+" onAction="#Increment" />
+        <Region HBox.hgrow="ALWAYS" />
+        <Button fx:id="printbutton" text="Print" onAction="#PrintLabel" styleClass="primary" />
+      </children>
+    </HBox>
+  </children>
 </fx:root>

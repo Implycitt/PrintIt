@@ -1,6 +1,6 @@
-package com.implycitt.printit.Services;
+package com.implycitt.printit.services;
 
-import com.implycitt.printit.Models.ItemLabel;
+import com.implycitt.printit.models.ItemLabel;
 
 import java.io.File;
 import java.sql.DatabaseMetaData;

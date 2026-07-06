@@ -1,8 +1,8 @@
-package com.implycitt.printit.Controllers;
+package com.implycitt.printit.controllers;
 
-import com.implycitt.printit.Models.ItemLabel;
-import com.implycitt.printit.Services.Database;
-import com.implycitt.printit.Services.Printing;
+import com.implycitt.printit.models.ItemLabel;
+import com.implycitt.printit.services.Database;
+import com.implycitt.printit.services.Printing;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.text.Text;
@@ -11,6 +11,7 @@ import java.awt.print.PrinterException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.function.Consumer;
 
 public class LabelController {
   @FXML
@@ -23,6 +24,10 @@ public class LabelController {
   private ListView categoryList;
 
   private int counter;
+
+  private ItemLabel itemLabel;
+
+  private Consumer<ItemLabel> onEditRequested;
 
   @FXML
   protected void Increment()
@@ -54,7 +59,20 @@ public class LabelController {
   @FXML
   protected void EditLabel()
   {
-    System.out.println(LabelName);
+    if (onEditRequested != null && itemLabel != null) {
+      onEditRequested.accept(itemLabel);
+    }
+  }
+
+  public void setOnEditRequested(Consumer<ItemLabel> callback)
+  {
+    this.onEditRequested = callback;
+  }
+
+  public void setItemLabel(ItemLabel itemLabel)
+  {
+    this.itemLabel = itemLabel;
+    setLabelName(itemLabel.primaryName);
   }
 
   public void setLabelName(String name)

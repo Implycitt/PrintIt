@@ -1,12 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Text?>
 
-<fx:root type="AnchorPane" fx:controller="com.implycitt.printit.Controllers.AddCategoryController"
+<fx:root type="AnchorPane" fx:controller="com.implycitt.printit.controllers.AddCategoryController"
          xmlns:fx="http://javafx.com/fxml/" xmlns="http://javafx.com/javafx/">
-  <TextField layoutX="8.0" fx:id="nameTextField" layoutY="153.0" />
-  <Button fx:id="addCategory" layoutX="56.0" layoutY="450.0" mnemonicParsing="false" text="Add" onAction="#createCategory" />
-  <Text layoutX="15.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" />
+  <children>
+    <VBox spacing="18.0" AnchorPane.topAnchor="0.0" AnchorPane.rightAnchor="0.0"
+          AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+      <padding>
+        <Insets top="24.0" right="24.0" bottom="24.0" left="24.0" />
+      </padding>
+      <children>
+        <Label text="Add a category" styleClass="form-title" />
+
+        <VBox spacing="6.0">
+          <children>
+            <Label text="Name" styleClass="form-label" />
+            <TextField fx:id="nameTextField" promptText="Category name" />
+          </children>
+        </VBox>
+
+        <Region VBox.vgrow="ALWAYS" />
+
+        <Button fx:id="addCategory" text="Add category" onAction="#createCategory" styleClass="primary" maxWidth="Infinity" />
+      </children>
+    </VBox>
+  </children>
 </fx:root>
