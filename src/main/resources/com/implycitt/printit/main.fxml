@@ -76,7 +76,6 @@
     </SplitPane>
   </children>
   <stylesheets>
-    <URL value="@../style/base.css" />
     <URL value="@../style/main.css" />
   </stylesheets>
 </VBox>

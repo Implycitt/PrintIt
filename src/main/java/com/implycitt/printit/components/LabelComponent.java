@@ -8,13 +8,13 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
-import java.util.function.Consumer;
+import java.util.function.BiConsumer;
 
 public class LabelComponent extends VBox
 {
   private final LabelController controller;
 
-  public LabelComponent(ItemLabel itemLabel) {
+  public LabelComponent(ItemLabel itemLabel, String category) {
     FXMLLoader fxmlLoader = new FXMLLoader(Window.class.getResource("labelComponent.fxml"));
     fxmlLoader.setRoot(this);
 
@@ -25,11 +25,16 @@ public class LabelComponent extends VBox
     }
 
     this.controller = fxmlLoader.getController();
-    this.controller.setItemLabel(itemLabel);
+    this.controller.setItemLabel(itemLabel, category);
   }
 
-  public void setOnEditRequested(Consumer<ItemLabel> callback)
+  public void setOnEditRequested(BiConsumer<ItemLabel, String> callback)
   {
     controller.setOnEditRequested(callback);
+  }
+
+  public void setOnDeleteRequested(BiConsumer<ItemLabel, String> callback)
+  {
+    controller.setOnDeleteRequested(callback);
   }
 }

@@ -155,6 +155,7 @@ public class Database {
           rs.getString("subcategories"),
           rs.getString("type")
         );
+        currentLabel.id = rs.getInt("id");
         allLabels.add(currentLabel);
       }
     } catch (SQLException e) {
@@ -164,11 +165,27 @@ public class Database {
   }
 
   public static ArrayList<ItemLabel> searchForEntries(String table, String searchText) throws SQLException {
-    // this is really ugly but like it works so, maybe fix at some point: searching parameter has to be surrounded with %
-    String sql = String.format("SELECT * FROM %s WHERE primaryName LIKE ", table) + "'%" + String.format("%s",searchText) + "%'" ;
-    return getAndTransform(executeQuery(sql));
+    ArrayList<ItemLabel> results = new ArrayList<>();
+    String sql = String.format("SELECT * FROM %s WHERE primaryName LIKE ?", table);
+    try (var connection = DriverManager.getConnection(url);
+         var statement = connection.prepareStatement(sql)) {
+      statement.setString(1, "%" + searchText + "%");
+      var rs = statement.executeQuery();
+      while (rs.next()) {
+        ItemLabel currentLabel = new ItemLabel(
+          rs.getString("primaryName"),
+          rs.getString("otherNames"),
+          rs.getString("url"),
+          rs.getString("subcategories"),
+          rs.getString("type")
+        );
+        currentLabel.id = rs.getInt("id");
+        results.add(currentLabel);
+      }
+    }
+    return results;
   }
-
+  
   public static ArrayList<ItemLabel> genericSearch(String searchText) throws SQLException
   {
     ArrayList<ItemLabel> allLabels = new ArrayList<>();
@@ -229,7 +246,6 @@ public class Database {
         rs.getString("subcategories"),
         rs.getString("type")
       );
-      System.out.println("currentLabel: " + currentLabel);
       labelList.add(currentLabel);
     }
     return labelList;

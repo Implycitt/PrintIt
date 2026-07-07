@@ -11,7 +11,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import com.implycitt.printit.services.Database;
 import javafx.scene.text.Text;
@@ -36,8 +35,6 @@ public class MainController {
   @FXML
   private AddCategory addCategoryPane;
 
-  ArrayList<ItemLabel> allLabels = new ArrayList<>();
-
   public void initialize() {
 
     refreshCategories();
@@ -58,7 +55,6 @@ public class MainController {
     });
   }
 
-  /** Reloads the category list from the database. */
   private void refreshCategories() {
     String previouslySelected = categoryList.getSelectionModel().getSelectedItem();
     categoryList.getItems().setAll(Database.getAllTables());
@@ -71,15 +67,28 @@ public class MainController {
     String searchText = searchBar.getText();
     String selectedCategory = categoryList.getSelectionModel().getSelectedItem();
 
+    labelsList.getChildren().clear();
+    boolean anyResults = false;
+
     try {
       if (searchText != null && !searchText.isEmpty()) {
-        allLabels = Database.genericSearch(searchText);
-      } else if (selectedCategory != null) {
-        allLabels = Database.getAllEntriesInTable(selectedCategory);
-      } else {
-        allLabels = new ArrayList<>();
         for (String table : Database.getAllTables()) {
-          allLabels.addAll(Database.getAllEntriesInTable(table));
+          for (ItemLabel itemLabel : Database.searchForEntries(table, searchText)) {
+            addLabelCard(itemLabel, table);
+            anyResults = true;
+          }
+        }
+      } else if (selectedCategory != null) {
+        for (ItemLabel itemLabel : Database.getAllEntriesInTable(selectedCategory)) {
+          addLabelCard(itemLabel, selectedCategory);
+          anyResults = true;
+        }
+      } else {
+        for (String table : Database.getAllTables()) {
+          for (ItemLabel itemLabel : Database.getAllEntriesInTable(table)) {
+            addLabelCard(itemLabel, table);
+            anyResults = true;
+          }
         }
       }
     } catch (SQLException e) {
@@ -87,16 +96,16 @@ public class MainController {
       return;
     }
 
-    labelsList.getChildren().clear();
-    if (allLabels.isEmpty()) {
+    if (!anyResults) {
       labelsList.getChildren().add(new Text("No labels found..."));
-      return;
     }
-    for (ItemLabel itemLabel : allLabels) {
-      LabelComponent newLabel = new LabelComponent(itemLabel);
-      newLabel.setOnEditRequested(this::handleEditRequest);
-      labelsList.getChildren().add(newLabel);
-    }
+  }
+
+  private void addLabelCard(ItemLabel itemLabel, String category) {
+    LabelComponent newLabel = new LabelComponent(itemLabel, category);
+    newLabel.setOnEditRequested(this::handleEditRequest);
+    newLabel.setOnDeleteRequested(this::handleDeleteRequest);
+    labelsList.getChildren().add(newLabel);
   }
 
   @FXML
@@ -105,9 +114,14 @@ public class MainController {
     refreshLabels();
   }
 
-  private void handleEditRequest(ItemLabel label) {
-    addLabelPane.populateForEdit(label, (String) categoryList.getSelectionModel().getSelectedItem());
+  private void handleEditRequest(ItemLabel label, String category) {
+    addLabelPane.populateForEdit(label, category);
     labelTab.getTabPane().getSelectionModel().select(labelTab);
+  }
+
+  private void handleDeleteRequest(ItemLabel label, String category) {
+    Database.deleteByID(label.id, category);
+    refreshLabels();
   }
 
 }

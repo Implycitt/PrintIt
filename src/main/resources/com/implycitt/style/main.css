@@ -253,6 +253,11 @@ Text, .text {
     -fx-fill: -fx-ink;
 }
 
+.label-category {
+    -fx-fill: -fx-ink-muted;
+    -fx-font-size: 12px;
+}
+
 .label-card {
     -fx-background-color: -fx-surface;
     -fx-background-radius: 0 10 10 0;

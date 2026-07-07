@@ -21,7 +21,6 @@ public class ItemLabel
 
   public String[] turnTextIntoArray(String text)
   {
-    // arrays are not supported in sqlite so I will steal idea behind csv except with pipe
     return text.split("\\|");
   }
 
