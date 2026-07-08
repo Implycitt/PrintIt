@@ -5,6 +5,7 @@ import com.implycitt.printit.components.AddLabel;
 import com.implycitt.printit.components.LabelComponent;
 import com.implycitt.printit.models.ItemLabel;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
@@ -27,6 +28,9 @@ public class MainController {
   private TextField searchBar;
 
   @FXML
+  private Button clearSearchButton;
+
+  @FXML
   private Tab labelTab;
 
   @FXML
@@ -39,6 +43,9 @@ public class MainController {
 
     refreshCategories();
     refreshLabels();
+
+    clearSearchButton.visibleProperty().bind(searchBar.textProperty().isNotEmpty());
+    clearSearchButton.managedProperty().bind(clearSearchButton.visibleProperty());
 
     categoryList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
       refreshLabels();
@@ -97,8 +104,22 @@ public class MainController {
     }
 
     if (!anyResults) {
-      labelsList.getChildren().add(new Text("No labels found..."));
+      labelsList.getChildren().add(buildEmptyState(searchText, selectedCategory));
     }
+  }
+
+  private Text buildEmptyState(String searchText, String selectedCategory) {
+    String message;
+    if (searchText != null && !searchText.isEmpty()) {
+      message = "No labels match \"" + searchText + "\".";
+    } else if (selectedCategory != null) {
+      message = "No labels in \"" + selectedCategory + "\" yet.";
+    } else {
+      message = "No labels yet, add one from the Label tab.";
+    }
+    Text placeholder = new Text(message);
+    placeholder.getStyleClass().add("empty-state");
+    return placeholder;
   }
 
   private void addLabelCard(ItemLabel itemLabel, String category) {
@@ -112,6 +133,11 @@ public class MainController {
   protected void clearCategorySelection() {
     categoryList.getSelectionModel().clearSelection();
     refreshLabels();
+  }
+
+  @FXML
+  protected void clearSearch() {
+    searchBar.clear();
   }
 
   private void handleEditRequest(ItemLabel label, String category) {

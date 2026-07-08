@@ -13,13 +13,31 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
-<VBox prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/25" fx:controller="com.implycitt.printit.controllers.MainController">
+<VBox prefHeight="600.0" prefWidth="800.0" spacing="16.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/25" fx:controller="com.implycitt.printit.controllers.MainController">
   <padding>
     <Insets top="16.0" right="16.0" bottom="16.0" left="16.0" />
   </padding>
   <children>
+    <HBox alignment="CENTER_LEFT" spacing="10.0">
+      <children>
+        <StackPane styleClass="brand-mark">
+          <children>
+            <Text text="P" styleClass="brand-mark-letter" />
+          </children>
+        </StackPane>
+        <VBox spacing="0.0">
+          <children>
+            <Label text="PrintIt" styleClass="app-title" />
+            <Label text="Label manager" styleClass="app-subtitle" />
+          </children>
+        </VBox>
+      </children>
+    </HBox>
     <SplitPane dividerPositions="0.79" VBox.vgrow="ALWAYS">
       <items>
         <SplitPane dividerPositions="0.26">
@@ -30,17 +48,27 @@
               </padding>
               <children>
                 <Label text="Categories" styleClass="sidebar-title" />
-                <ListView fx:id="categoryList" VBox.vgrow="ALWAYS" />
+                <ListView fx:id="categoryList" VBox.vgrow="ALWAYS">
+                  <placeholder>
+                    <Label text="No categories yet" styleClass="form-hint" />
+                  </placeholder>
+                </ListView>
                 <Button text="Clear selection" onAction="#clearCategorySelection" styleClass="ghost" maxWidth="Infinity" />
               </children>
             </VBox>
-
             <VBox spacing="12.0">
               <padding>
                 <Insets top="0.0" right="0.0" bottom="0.0" left="10.0" />
               </padding>
               <children>
-                <TextField fx:id="searchBar" promptText="Search for a label..." styleClass="search-field" />
+                <StackPane>
+                  <children>
+                    <TextField fx:id="searchBar" promptText="Search for a label..." styleClass="search-field" />
+                    <Button fx:id="clearSearchButton" text="&#215;" onAction="#clearSearch"
+                            styleClass="search-clear-button" visible="false" managed="false"
+                            StackPane.alignment="CENTER_RIGHT" />
+                  </children>
+                </StackPane>
                 <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
                   <content>
                     <VBox fx:id="labelsList" spacing="10.0" />
@@ -50,7 +78,6 @@
             </VBox>
           </items>
         </SplitPane>
-
         <VBox>
           <padding>
             <Insets top="0.0" right="0.0" bottom="0.0" left="12.0" />

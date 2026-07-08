@@ -37,7 +37,7 @@
         <VBox spacing="6.0">
           <children>
             <Label text="Subcategories" styleClass="form-label" />
-            <TextField fx:id="categoryField" promptText="Comma-separated subcategories" />
+            <TextField fx:id="categoryField" promptText="Space separated subcategories" />
           </children>
         </VBox>
 
