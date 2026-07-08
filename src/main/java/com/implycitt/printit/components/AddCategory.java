@@ -1,4 +1,6 @@
-package com.implycitt.printit.Components;
+package com.implycitt.printit.components;
+
+import com.implycitt.printit.controllers.AddCategoryController;
 
 import com.implycitt.printit.Window;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +12,9 @@ import java.io.IOException;
 
 public class AddCategory extends AnchorPane
 {
+
+  private final AddCategoryController controller;
+
   public AddCategory()
   {
     FXMLLoader fxmlLoader = new FXMLLoader(Window.class.getResource("addCategory.fxml"));
@@ -20,5 +25,12 @@ public class AddCategory extends AnchorPane
     } catch (IOException e) {
       System.out.println(e);
     }
+
+    this.controller = fxmlLoader.getController();
+  }
+
+  public void setOnCategoryAdded(Runnable callback)
+  {
+    controller.setOnCategoryAdded(callback);
   }
 }

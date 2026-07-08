@@ -1,64 +1,108 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.URL?>
+<?import com.implycitt.printit.components.AddCategory?>
+<?import com.implycitt.printit.components.AddLabel?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
-<VBox alignment="CENTER" prefHeight="600.0" prefWidth="800.0" spacing="20.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/25" fx:controller="com.implycitt.printit.Controllers.MainController">
+<VBox prefHeight="600.0" prefWidth="800.0" spacing="16.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/25" fx:controller="com.implycitt.printit.controllers.MainController">
+  <padding>
+    <Insets top="16.0" right="16.0" bottom="16.0" left="16.0" />
+  </padding>
   <children>
-    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <HBox alignment="CENTER_LEFT" spacing="10.0">
       <children>
-        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+        <StackPane styleClass="brand-mark">
           <children>
-            <SplitPane dividerPositions="0.7892976588628764" prefHeight="600.0" prefWidth="800.0">
-              <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0">
-                  <children>
-                    <SplitPane dividerPositions="0.25882352941176473" prefHeight="600.0" prefWidth="626.0">
-                      <items>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                          <children>
-                            <ListView fx:id="categoryList" layoutX="8.0" layoutY="13.0" prefHeight="572.0" prefWidth="142.0" />
-                          </children>
-                        </AnchorPane>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                          <children>
-                            <VBox fx:id="labelsList" layoutX="11.0" layoutY="46.0" prefHeight="539.0" prefWidth="435.0" />
-                            <TextField fx:id="searchBar" layoutX="11.0" layoutY="14.0" prefHeight="25.0" prefWidth="436.0" promptText="Search for a label..."/>
-                          </children>
-                        </AnchorPane>
-                      </items>
-                    </SplitPane>
-                  </children></AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0">
-                  <VBox spacing="5">
-                    <children>
-                      <TabPane layoutX="7.0" layoutY="6.0" maxHeight="1.7976931348623157E308" prefHeight="69.0" prefWidth="195.0" tabClosingPolicy="UNAVAILABLE">
-                        <Tab fx:id="labelTab" text="Label">
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                        </Tab>
-                        <Tab fx:id="categoryTab" text="Category">
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                        </Tab>
-                      </TabPane>
-                      <AnchorPane fx:id="rightSidebar" />
-                    </children>
-                  </VBox>
-                </AnchorPane>
-              </items>
-            </SplitPane>
+            <Text text="P" styleClass="brand-mark-letter" />
           </children>
-        </AnchorPane>
+        </StackPane>
+        <VBox spacing="0.0">
+          <children>
+            <Label text="PrintIt" styleClass="app-title" />
+            <Label text="Label manager" styleClass="app-subtitle" />
+          </children>
+        </VBox>
       </children>
-    </AnchorPane>
+    </HBox>
+    <SplitPane dividerPositions="0.79" VBox.vgrow="ALWAYS">
+      <items>
+        <SplitPane dividerPositions="0.26">
+          <items>
+            <VBox spacing="10.0">
+              <padding>
+                <Insets top="0.0" right="10.0" bottom="0.0" left="0.0" />
+              </padding>
+              <children>
+                <Label text="Categories" styleClass="sidebar-title" />
+                <ListView fx:id="categoryList" VBox.vgrow="ALWAYS">
+                  <placeholder>
+                    <Label text="No categories yet" styleClass="form-hint" />
+                  </placeholder>
+                </ListView>
+                <Button text="Clear selection" onAction="#clearCategorySelection" styleClass="ghost" maxWidth="Infinity" />
+              </children>
+            </VBox>
+            <VBox spacing="12.0">
+              <padding>
+                <Insets top="0.0" right="0.0" bottom="0.0" left="10.0" />
+              </padding>
+              <children>
+                <StackPane>
+                  <children>
+                    <TextField fx:id="searchBar" promptText="Search for a label..." styleClass="search-field" />
+                    <Button fx:id="clearSearchButton" text="&#215;" onAction="#clearSearch"
+                            styleClass="search-clear-button" visible="false" managed="false"
+                            StackPane.alignment="CENTER_RIGHT" />
+                  </children>
+                </StackPane>
+                <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
+                  <content>
+                    <VBox fx:id="labelsList" spacing="10.0" />
+                  </content>
+                </ScrollPane>
+              </children>
+            </VBox>
+          </items>
+        </SplitPane>
+        <VBox>
+          <padding>
+            <Insets top="0.0" right="0.0" bottom="0.0" left="12.0" />
+          </padding>
+          <children>
+            <TabPane tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+              <tabs>
+                <Tab fx:id="labelTab" text="Label">
+                  <content>
+                    <AddLabel fx:id="addLabelPane" />
+                  </content>
+                </Tab>
+                <Tab fx:id="categoryTab" text="Category">
+                  <content>
+                    <AddCategory fx:id="addCategoryPane" />
+                  </content>
+                </Tab>
+              </tabs>
+            </TabPane>
+          </children>
+        </VBox>
+      </items>
+    </SplitPane>
   </children>
   <stylesheets>
-    <URL value="@../style/base.css" />
     <URL value="@../style/main.css" />
   </stylesheets>
 </VBox>

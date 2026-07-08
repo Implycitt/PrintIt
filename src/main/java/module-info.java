@@ -12,7 +12,16 @@ module com.implycitt.printit {
   requires javafx.graphics;
 
   opens com.implycitt.printit to javafx.fxml;
-    exports com.implycitt.printit;
-  exports com.implycitt.printit.Controllers;
-  opens com.implycitt.printit.Controllers to javafx.fxml;
+  exports com.implycitt.printit;
+
+  exports com.implycitt.printit.controllers;
+  opens com.implycitt.printit.controllers to javafx.fxml;
+
+  exports com.implycitt.printit.components;
+  opens com.implycitt.printit.components to javafx.fxml;
+
+  exports com.implycitt.printit.models;
+  opens com.implycitt.printit.models to javafx.fxml;
+
+  exports com.implycitt.printit.services;
 }
