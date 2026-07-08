@@ -32,12 +32,32 @@ jobs:
           distribution: temurin
           java-version: "25"
 
-      - name: Build self-contained runtime image
-        run: mvn -B clean javafx:jlink -DskipTests
+      - name: Build self-contained fat jar
+        run: mvn -B clean package -DskipTests
 
-      - name: Rename zip for this platform
+      - name: Package app image with jpackage
         shell: bash
-        run: mv target/app.zip "${{ matrix.asset_name }}"
+        run: |
+          mkdir -p target/jpackage-input
+          cp target/PrintIt-1.0-SNAPSHOT.jar target/jpackage-input/
+          jpackage --type app-image \
+            --input target/jpackage-input \
+            --main-jar PrintIt-1.0-SNAPSHOT.jar \
+            --main-class com.implycitt.printit.Launcher \
+            --name PrintIt \
+            --dest target/dist
+
+      - name: Zip app image (Linux/macOS)
+        if: runner.os != 'Windows'
+        shell: bash
+        run: |
+          cd target/dist
+          zip -r "../../${{ matrix.asset_name }}" .
+
+      - name: Zip app image (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: Compress-Archive -Path target/dist/* -DestinationPath "${{ matrix.asset_name }}"
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v6
