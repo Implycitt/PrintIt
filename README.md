@@ -1,8 +1,29 @@
+<div align="center">
+
 # PrintIT
+
+An efficient label printing solution for businesses that need to manage and print labels regularly.
+
+<div align="center">
+
+![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
+![JavaFX](https://img.shields.io/badge/JavaFX-0095D5?style=for-the-badge&logo=java&logoColor=white)
+![SQLite](https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white)
+![Maven](https://img.shields.io/badge/Maven-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white)
+
+</div>
+
+</div>
 
 ---
 
-PrintIT is an efficient label printing solution designed for businesses that need to manage and print labels regularly. It streamlines the workflow by organizing labels into categories and providing a quick, searchable interface, significantly reducing the time spent on manual label management.
+## Demo
+
+<div align="center">
+    <img src="Documents/demo.gif" alt="PrintIT demo" width="850"/>
+</div>
+
+---
 
 ## Key Features
 
@@ -16,7 +37,7 @@ PrintIT is an efficient label printing solution designed for businesses that nee
 
 ## Purpose
 
-When I worked at a small local business, one of our main tasks was to print labels that would go on the products we sold. The files for the labels were scattered throughout the computer's file system, there were inexplicably duplicate labels, and some labels were even outdated. 
+When I worked at a small local business, one of our main tasks was to print labels that would go on the products we sold. The files for the labels were scattered throughout the computer's file system, there were inexplicably duplicate labels, and some labels were even outdated.
 
 Printing one or two of these on occasion was not a big deal. However, during the holiday season, we would need to print dozens of these labels every day. As you can imagine, this slowed down how fast we could put out the product and made a worker unavailable for the time being.
 
@@ -34,7 +55,10 @@ Every design decision keeps in mind the goal of efficiency and organization. Whi
 
 For more information, refer to the [Business Overview](https://github.com/Implycitt/PrintIt/blob/main/Documents/PrintIT.pdf)
 
+---
+
 ## How to Build and Run
+
 To build and run the project using Maven, ensure you have [Java](https://www.java.com/en/) and [Maven](https://maven.apache.org/) installed.
 
 ```bash
@@ -44,3 +68,5 @@ mvn clean install
 # Run the project
 mvn javafx:run
 ```
+
+Alternatively, you can download the [latest release](https://github.com/Implycitt/PrintIt/releases).
